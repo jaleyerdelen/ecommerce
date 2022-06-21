@@ -1,0 +1,22 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "e commerce",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon v1/src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaleyerdelen/ecommerce.git"
+  },
+  "author": "Jale Yerdelen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaleyerdelen/ecommerce/issues"
+  },
+  "homepage": "https://github.com/jaleyerdelen/ecommerce#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
