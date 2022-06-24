@@ -19,7 +19,7 @@ const CartSchema = new Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 const Cart = mongoose.model("Cart", CartSchema);
