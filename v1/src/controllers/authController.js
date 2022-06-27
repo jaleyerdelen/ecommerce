@@ -24,7 +24,10 @@ const createUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
-    sendToken( user, 200, req, res )
+    res.status(200).json({
+        message: "Success created",
+        user
+    })
   } catch (error) {
     res.status(400).json({
       message: "error creating user",
@@ -40,12 +43,7 @@ const loginUser = async (req, res) => {
     if (!user) return res.status(400).send("email couldn't find");
     const compared = await bcrypt.compare(pass, user.password);
     if (compared === false) return res.status(400).send("wrong password ");
-  if(user)  return sendToken(user, 200, req, res)
-    const { password, ...others } = user._doc;
-    res.status(200).json({
-      message: "success login",
-      others,
-    });
+    return sendToken(user, 200, req, res)
   } catch (error) {
     res.status(400).json({
       message: "error login",
