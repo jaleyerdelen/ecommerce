@@ -1,10 +1,10 @@
 const express = require("express")
-const { user, userpost } = require("../controllers/user")
+const { updateUser } = require("../controllers/user")
 
 const router = express.Router()
 
-router.get("/", user)
-router.post("/userpost", userpost)
+router.put("/:id", updateUser )
+
 
 module.exports = {
     router
