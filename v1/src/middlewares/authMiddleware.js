@@ -7,14 +7,10 @@ const verifyToken = async (req, res, next) => {
     if (token === undefined)
       return res.status(400).json({ message: "unauthorized" });
 
-    jwt.verify(token, process.env.JWT_SEC, async (err, user) => {
+    jwt.verify(token, process.env.JWT_SEC, (err, user) => {
       if (err) res.status(400).json({ message: "token is not valid" });
       req.user = user;
-      if (req.user.id === req.params.id) {
-        next();
-      } else {
-        res.status(400).json({ message: "you are not allowed to do that" });
-      }
+      next()
     });
   } catch {
     res.status(400).json({ message: "error" });
