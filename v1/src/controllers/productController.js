@@ -18,13 +18,14 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    product.title = req.body.title;
-    product.desc = req.body.desc;
-    product.img = req.body.img;
-    product.categories = req.body.categories;
-    product.size = req.body.size;
-    product.color = req.body.color;
-    product.price = req.body.price;
+    const { title, desc, img, categories, size, color, price } = req.body;
+    product.title = title;
+    product.desc = desc;
+    product.img = img;
+    product.categories = categories;
+    product.size = size;
+    product.color = color;
+    product.price = price;
 
     const savedProduct = await product.save();
     res.status(200).json({
@@ -73,20 +74,18 @@ const getProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
-    const qNew = req.query.new;
     const qCategory = req.query.category;
     console.log(qCategory);
     let product;
-    if (qNew) {
-      product = await Product.find().sort({ createdAt: -1 }).limit(1);
-    } else if (qCategory) {
+    if (qCategory) {
       product = await Product.find({
         categories: {
           $in: [qCategory],
         },
       });
     } else {
-      product = await Product.find();
+      product === undefined;
+      return res.status(404).send("please enter a value");
     }
 
     res.status(200).json({
@@ -99,7 +98,6 @@ const getAllProduct = async (req, res) => {
     });
   }
 };
-
 
 module.exports = {
   createProduct,
