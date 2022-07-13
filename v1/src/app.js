@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const config = require("./config")
-const { userRoute, productRoute, authRoute, cartRoute } = require("./routes")
+const { userRoute, productRoute, authRoute, cartRoute, orderRoute } = require("./routes")
 const mongoose = require("mongoose")
 config()
 
@@ -18,6 +18,7 @@ app.use("/user", userRoute.router)
 app.use("/product", productRoute.router)
 app.use("/auth", authRoute.router)
 app.use("/cart", cartRoute.router)
+app.use("/order", orderRoute.router)
 
 app.listen(process.env.APP_PORT, () => {
     console.log("server is running")
